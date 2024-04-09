@@ -7,7 +7,7 @@ public class _GameUIController : MonoBehaviour
 {
     public Text player1Text;
     public Text player2Text;
-    public Text player1Goas;
+    public Text player1Goals;
     public Text player2Goals;
     public Text actionText;
 
@@ -15,6 +15,15 @@ public class _GameUIController : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void UpdatePlayer1Goals(string s)
+    {
+        player1Goals.text = s;
+    }
+    public void UpdatePlayer2Goals(string s)
+    {
+        player2Goals.text = s;
     }
 
     public void updateActionText(string s)

@@ -45,7 +45,39 @@ public class GameFlowController : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator goalAnimationController()
+    public IEnumerator goalPlayer1()
+    {
+        player1Goals++;
+        uiController.UpdatePlayer1Goals(player1Goals.ToString());
+
+        if (HasFinished())
+        {
+            // TODO PlayerPrefs player 1  won
+            Application.LoadLevel("GameOver");
+        }
+
+        ball.ResetBall(true);
+        yield return StartCoroutine(goalAnimationCoroutine());
+        StartCoroutine(startNewRound(false));
+    }
+
+    public IEnumerator goalPlayer2()
+    {
+        player2Goals++;
+        uiController.UpdatePlayer2Goals(player2Goals.ToString());
+
+        if (HasFinished())
+        {
+            // TODO PlayerPrefs player 2  won
+            Application.LoadLevel("GameOver");
+        }
+
+        ball.ResetBall(false);
+        yield return StartCoroutine(goalAnimationCoroutine());
+        StartCoroutine(startNewRound(true));
+    }
+
+    private IEnumerator goalAnimationCoroutine()
     {
         uiController.updateActionText("GOAL!!");
         yield return new WaitForSeconds(3);
@@ -55,5 +87,17 @@ public class GameFlowController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private bool HasFinished()
+    {
+        if(player1Goals == maxGoals || player2Goals == maxGoals)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

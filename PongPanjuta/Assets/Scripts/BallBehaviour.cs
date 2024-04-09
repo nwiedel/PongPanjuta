@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
+    public GameFlowController game;
+
     public float speed = 300f;
     private float speedCummulator = 50f;
 
     private int hitCounter = 0;
-    void Start()
-    {
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
-    }
 
     public void ResetBall(bool isPlayer1)
     {
@@ -54,6 +52,14 @@ public class BallBehaviour : MonoBehaviour
         {
             OnCollisionPlayer2Racket(other);
         }
+        else if(other.gameObject.name == "LeftWall")
+        {
+            OnCollisionPlayer1Wall(other);
+        }
+        else if (other.gameObject.name == "RightWall")
+        {
+            OnCollisionPlayer2Wall(other);
+        }
     }
 
     private void OnCollisionPlayer1Racket(Collision2D other)
@@ -82,5 +88,14 @@ public class BallBehaviour : MonoBehaviour
         }
 
         // TODO adding sound
+    }
+
+    private void OnCollisionPlayer1Wall(Collision2D c)
+    {
+        StartCoroutine(game.goalPlayer2());
+    }
+    private void OnCollisionPlayer2Wall(Collision2D c)
+    {
+        StartCoroutine(game.goalPlayer1());
     }
 }
