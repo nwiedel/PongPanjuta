@@ -19,13 +19,37 @@ public class PlayPagePreferences : MonoBehaviour
         {
             player2NameText.text = PlayerPrefs.GetString("player2Name");
         }
-        if(PlayerPrefs.GetString(isAI) == "true")
+        if(PlayerPrefs.GetString("isAI") == "true")
         {
             aiToggle.isOn = true;
         }
         else
         {
             aiToggle.isOn = false;
+        }
+    }
+
+    public void ChangePlayer1Name(string name)
+    {
+        player1NameText.text = name;
+        PlayerPrefs.SetString("player1Name", name);
+    }
+
+    public void ChangePlayer2Name(string name)
+    {
+        player2NameText.text = name;
+        PlayerPrefs.SetString("player2Name", name);
+    }
+
+    public void toggleAI()
+    {
+        if (aiToggle.isOn)
+        {
+            PlayerPrefs.SetString("isAI", "true");
+        }
+        else
+        {
+            PlayerPrefs.SetString("isAI", "false");
         }
     }
 }

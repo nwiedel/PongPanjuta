@@ -41,6 +41,10 @@ public class GameFlowController : MonoBehaviour
         uiController.updateActionText("1");
         yield return new WaitForSeconds(1);
 
+        // TODO Sound abspielen
+        uiController.updateActionText("Pong");
+        yield return new WaitForSeconds(1);
+
         uiController.updateActionText("");
         yield break;
     }
@@ -52,13 +56,22 @@ public class GameFlowController : MonoBehaviour
 
         if (HasFinished())
         {
+            if(PlayerPrefs.GetString("player1Name") != null)
+            {
+                PlayerPrefs.SetString("lastWinner", PlayerPrefs.GetString("player1Name"));
+            }
+            else
+            {
+                PlayerPrefs.SetString("lastWinner", "Player 1");
+            }
+
             // TODO PlayerPrefs player 1  won
-            Application.LoadLevel("GameOver");
+            Application.LoadLevel("GameOverScene");
         }
 
         ball.ResetBall(true);
         yield return StartCoroutine(goalAnimationCoroutine());
-        StartCoroutine(startNewRound(false));
+        StartCoroutine(startNewRound(true));
     }
 
     public IEnumerator goalPlayer2()
@@ -68,13 +81,22 @@ public class GameFlowController : MonoBehaviour
 
         if (HasFinished())
         {
+            if (PlayerPrefs.GetString("player2Name") != null)
+            {
+                PlayerPrefs.SetString("lastWinner", PlayerPrefs.GetString("player2Name"));
+            }
+            else
+            {
+                PlayerPrefs.SetString("lastWinner", "Player 2");
+            }
+
             // TODO PlayerPrefs player 2  won
-            Application.LoadLevel("GameOver");
+            Application.LoadLevel("GameOverScene");
         }
 
         ball.ResetBall(false);
         yield return StartCoroutine(goalAnimationCoroutine());
-        StartCoroutine(startNewRound(true));
+        StartCoroutine(startNewRound(false));
     }
 
     private IEnumerator goalAnimationCoroutine()

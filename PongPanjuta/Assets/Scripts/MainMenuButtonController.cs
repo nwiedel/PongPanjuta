@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class MainMenuButtonController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject startPageUI;
+    public GameObject playPageUI;
+    public GameObject optionsPageUI;
+
+    public void ShowStartPage()
     {
-        
+        startPageUI.SetActive(true);
+        playPageUI.SetActive(false);
+        optionsPageUI.SetActive(false);
+    }
+    public void ShowOptionsPage()
+    {
+        startPageUI.SetActive(false);
+        playPageUI.SetActive(false);
+        optionsPageUI.SetActive(true);
+    }
+    public void ShowPlayPage()
+    {
+        startPageUI.SetActive(false);
+        playPageUI.SetActive(true);
+        optionsPageUI.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayGame()
     {
-        
+        Application.LoadLevel("GameScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

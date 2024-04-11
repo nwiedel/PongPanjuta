@@ -14,7 +14,8 @@ public class _GameUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player1Text.text = PlayerPrefs.GetString("player1Name");
+        player2Text.text = PlayerPrefs.GetString("player2Name");
     }
 
     public void UpdatePlayer1Goals(string s)
