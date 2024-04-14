@@ -8,6 +8,7 @@ public class BallBehaviour : MonoBehaviour
 
     public float speed = 300f;
     private float speedCummulator = 50f;
+    public SoundController sound;
 
     private int hitCounter = 0;
 
@@ -60,6 +61,10 @@ public class BallBehaviour : MonoBehaviour
         {
             OnCollisionPlayer2Wall(other);
         }
+        else if(other.gameObject.name == "TopWall" || other.gameObject.name == "BottomWall")
+        {
+            OnCollisionTopBotWall();
+        }
     }
 
     private void OnCollisionPlayer1Racket(Collision2D other)
@@ -73,7 +78,7 @@ public class BallBehaviour : MonoBehaviour
             hitCounter++;
         }
 
-        // TODO adding sound
+        sound.racketSound.Play();
     }
 
     private void OnCollisionPlayer2Racket(Collision2D other)
@@ -87,7 +92,7 @@ public class BallBehaviour : MonoBehaviour
             hitCounter++;
         }
 
-        // TODO adding sound
+        sound.racketSound.Play();
     }
 
     private void OnCollisionPlayer1Wall(Collision2D c)
@@ -97,5 +102,10 @@ public class BallBehaviour : MonoBehaviour
     private void OnCollisionPlayer2Wall(Collision2D c)
     {
         StartCoroutine(game.goalPlayer1());
+    }
+
+    private void OnCollisionTopBotWall()
+    {
+        sound.wallSound.Play();
     }
 }

@@ -29,19 +29,19 @@ public class GameFlowController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        // TODO Sound abspielen
+        sounds.wallSound.Play();
         uiController.updateActionText("3");
         yield return new WaitForSeconds(1);
 
-        // TODO Sound abspielen
+        sounds.wallSound.Play();
         uiController.updateActionText("2");
         yield return new WaitForSeconds(1);
 
-        // TODO Sound abspielen
+        sounds.wallSound.Play();
         uiController.updateActionText("1");
         yield return new WaitForSeconds(1);
 
-        // TODO Sound abspielen
+        sounds.wallSound.Play();
         uiController.updateActionText("Pong");
         yield return new WaitForSeconds(1);
 
